@@ -1,0 +1,54 @@
+<div class="container">
+	<div class="page-header">
+		<h3>All Deals</h3>
+	</div>
+	<div class="row">
+		<div class="col-md-2">
+			Date Range
+		</div>
+		<div class="col-md-6">
+			<%=form_tag do%>
+				<%=text_field_tag "date",nil,class: "daterange"%>
+			<%end%>
+		</div>
+	</div>
+	<div class="row">	
+		<table class="table datatable">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Person Name</th>
+					<th>Orgenization Name</th>
+					<th>Rs.</th>
+					<th>Currency</th>
+					<th>Add Time</th>
+					<th>Update Time</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%@allDeals["data"].each_with_index do |deal,index|%>
+					<tr>
+						<td><%=index + 1%></td>
+						<td><%= deal["creator_user_id"]["name"]%></td>
+						<td><%= deal["creator_user_id"]["email"]%></td>
+						<td><%= deal["person_id"]["name"]%></td>
+						<td><%= deal["org_id"]["name"]%></td>
+						<td><%= deal["value"]%></td>
+						<td><%= deal["currency"]%></td>
+						<td><%= deal["add_time"]%></td>
+						<td><%= deal["update_time"]%></td>
+					</tr>
+				<%end%>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$('.datatable').DataTable({
+	  processing: true
+	});
+	$('input[class="daterange"]').daterangepicker();
+</script>
